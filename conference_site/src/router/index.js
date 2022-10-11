@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/chair/HomeView.vue";
+import HomeView from "../views/researcher/HomeView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,14 +22,41 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: "/events",
+      name: "events",
+      component: () => import("../views/researcher/EventsView.vue")
+    },
+    {
+      path: "/papers",
+      name: "papers",
+      component: () => import("../views/researcher/PapersView.vue")
+    },
+    {
+      path: "/contact",
+      name: "contact",
+      component: () => import("../views/researcher/ContactView.vue")
+    },
+    {
       path: "/about",
       name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import("../views/chair/AboutView.vue"),
+      component: () => import("../views/researcher/AboutView.vue"),
     },
-      // Admin Routes
+      // Chair Routes
+    {
+        path: "/chair/pending-papers",
+        name: "pending-papers",
+        component: () => import("../views/chair/PendingPapersView.vue")
+    },
+    {
+      path: "/chair/reviews",
+      name: "reviews",
+      component: () => import("../views/chair/ReviewsView.vue")
+    },
+    {
+      path: "/chair/submit-article",
+      name: "submit-article",
+      component: () => import("../views/chair/SubmitArticleView.vue")
+    }
   ],
 });
 

@@ -1,4 +1,4 @@
-# Web Application Development Assignment
+npx tailwindcss init -p# Web Application Development Assignment
 
 ## Tasks:
 * Design Database
