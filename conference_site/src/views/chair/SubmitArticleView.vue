@@ -1,6 +1,8 @@
 <template>
+<main class="flex flex-rows">
   <SideBar/>
-<h1>Submit Article</h1>
+  <h1>Submit Article</h1>
+</main>
 </template>
 
 <script>

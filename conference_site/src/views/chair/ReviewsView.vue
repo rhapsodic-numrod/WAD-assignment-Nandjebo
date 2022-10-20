@@ -1,6 +1,8 @@
 <template>
-  <SideBar/>
-<h1>Reviews</h1>
+  <main class="flex flex-rows">
+    <SideBar/>
+    <h1>Reviews</h1>
+  </main>
 </template>
 
 <script>
