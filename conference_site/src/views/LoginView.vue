@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="conferenceLogo flex flex-row">
-    <IconNust :width="20" class="logo order-0"/>
+    <IconNust location="/" :width="20" class="logo order-0"/>
       <h1 class="order-1 text-white">
       Tech for Humanity Conference
       @ NUST
