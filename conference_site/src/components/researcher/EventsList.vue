@@ -1,48 +1,75 @@
-<template v-for="event in events" :key="event.name">
-  <Suspense>
-    <li v-if="!event === error">
+<template v-if="dataLoaded">
+  <div v-if="data.length === 0" >
+    <h1>Events still need to be added</h1>
+  </div>
+
+  <ul v-else class="gap-4">
+
+    <li
+        :key="index"
+        v-for="(conferenceEvent, index) in data"
+    >
       <Event
-          :event-name= "event.name"
-          date="12 Jan 2002"
-          location="Engineering Basement A"
+          :event-name= "conferenceEvent.name"
+          :date="conferenceEvent.date"
+          :location="conferenceEvent.building"
           :action="goToEvent"
       />
     </li>
-  </Suspense>
+  </ul>
+
+
+
 </template>
 
-<script setup>
+<script >
 import Event from "./Event.vue";
 import {supabase} from "../../supabase";
+import {ref} from "vue";
+import router from "../../router";
 
 
-let { data: events, error } = await supabase
-    .from('Event')
-    .select(`
-    id,
-    name,
-    description,
-    date,
-    building:location_id( building ),
-    room:location_id( room ),
-    Event:id( name )
-    `)
-
-function goToEvent(){
-  console.log(Event.name)
-}
-
-// export default {
-//   name: "EventsList",
-//   components: {Event},
-//   methods: {
-//     goToEvent(){
-//       console.log(Event.name)
-//     }
-//   },
-//   data: data
 //
-// }
+
+
+export default {
+  name: "EventsList",
+  components: {Event},
+  methods: {
+    goToEvent(id){
+     console.log("hectic")
+    }
+  },
+  setup() {
+    const data = ref([])
+    const dataLoaded = ref(null)
+
+    const getData = async () => {
+      try {
+        const { data: events, error } = await supabase
+            .from('Event')
+            .select(`
+              id,
+              name,
+              description,
+              date,
+              Location ( building ),
+              EventType ( name )
+              `);
+        if (error) throw error;
+        data.value = events;
+        dataLoaded.value = true;
+      }catch (error){
+        console.warn(error.message)
+      }
+    }
+
+    getData()
+
+    return {data, dataLoaded}
+  }
+
+}
 </script>
 
 <style scoped>

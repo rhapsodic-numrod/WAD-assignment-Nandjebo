@@ -5,17 +5,18 @@
   />
   <nav class="bg-blue-900 top-0 ">
     <IconNust location="/" :width="3" class="nustLogo"/>
-    <div class="pageGroup">
+    <ul class="pageGroup">
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
       <RouterLink to="/events">Events</RouterLink>
       <RouterLink to="/papers">Papers</RouterLink>
       <RouterLink to="/contact">Contact</RouterLink>
-    </div>
-    <div class="loginGroup ">
-      <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/register">Register</RouterLink>
-    </div>
+    </ul>
+    <ul class="loginGroup ">
+      <RouterLink v-if="!user" to="/login">Login</RouterLink>
+      <RouterLink v-if="!user" to="/register">Register</RouterLink>
+      <li v-if="user" @click="logout" class="cursor-pointer">Logout</li>
+    </ul>
   </nav>
 </header>
 </template>
@@ -23,12 +24,27 @@
 <script>
 import { RouterLink} from "vue-router";
 import IconNust from "../icons/IconNust.vue";
+import {supabase} from "../../supabase";
+import {useRouter} from "vue-router";
+import {computed} from "vue";
+import store from '@/stores/index.js'
 
 export default {
   name: "Navbar",
   components: {
     RouterLink,
     IconNust
+  },
+  setup() {
+    const user = computed(() => store.state.user)
+
+    const router = useRouter();
+
+    const logout = async () => {
+      await supabase.auth.signOut()
+      router.push({name: "home"})
+    }
+    return {logout, user}
   }
 }
 </script>

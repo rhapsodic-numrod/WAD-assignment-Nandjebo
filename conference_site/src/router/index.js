@@ -41,7 +41,17 @@ const router = createRouter({
       name: "about",
       component: () => import("../views/researcher/AboutView.vue"),
     },
-      // Chair Routes
+    {
+      path: "/papers/paper/:paperId",
+      name: "view-paper",
+      component: () => import("../views/researcher/ViewPaper.vue")
+    },
+    {
+      path: "/events/event/:eventId",
+      name: "view-event",
+      component: () => import("../views/researcher/ViewEvent.vue")
+    },
+    // Chair Routes
     {
         path: "/chair/pending-papers",
         name: "pending-papers",
