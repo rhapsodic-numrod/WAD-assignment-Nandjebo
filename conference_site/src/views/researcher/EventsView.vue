@@ -14,11 +14,13 @@
       <EventsList/>
     </div>
   </main>
+  <Footer/>
 </template>
 
 <script setup>
 import EventsList from "../../components/researcher/EventsList.vue";
 import Navbar from "../../components/researcher/Navbar.vue";
+import Footer from "../../components/Footer.vue";
 </script>
 
 <style scoped>

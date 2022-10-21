@@ -1,5 +1,5 @@
 <template>
-<div class="event">
+<div class="event border-2 p-3">
   <div class="eventInfo">
     <h1>{{ eventName }}</h1>
     <h1>{{ date }}</h1>
